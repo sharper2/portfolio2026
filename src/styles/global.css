@@ -132,14 +132,15 @@ section {
 .hero-image {
   position: relative;
   display: inline-block;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
 }
 
 .hero-image img {
   display: block;
-  width: 300px;
-  height: 300px;
+  width: clamp(220px, 30vw, 300px);
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  height: auto;
   border-radius: 50%;
   position: relative;
   z-index: 2; /* image on top of glow */
@@ -149,10 +150,8 @@ section {
 .hero-image::before {
   content: "";
   position: absolute;
-  top: -15px;       /* smaller offset */
-  left: -15px;
-  width: 330px;     /* image width + 2*offset */
-  height: 330px;
+  inset: 0;
+
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
@@ -160,15 +159,19 @@ section {
     var(--accent-secondary),
     var(--accent-primary)
   );
-  filter: blur(25px);      /* less blur makes it tighter */
+
+  transform: scale(1.03);
+  transform-origin: center;
+
+  filter: blur(14px);      /* less blur makes it tighter */
   opacity: 0.55;           /* reduced opacity */
   z-index: 1;
   animation: rotate-glow 25s linear infinite;
 }
 
 @keyframes rotate-glow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  from { transform: scale(1.03) rotate(0deg); }
+  to   { transform: scale(1.03) rotate(360deg); }
 }
 
 .hero {
@@ -307,16 +310,23 @@ section {
 /* =========================================================
    CONNECTIONS
    ========================================================= */
-.links-grid {
+  .connections h2 {
+    display: flex;
+    justify-content: center;
+  }
+
+   .links-grid {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
   margin-top: 1.5rem;
+  justify-content: center;
 }
 
 .links-grid a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-size: 0.95rem;
   font-weight: 600;
@@ -347,15 +357,24 @@ section {
   .hero-inner {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 2rem;
   }
 
   .hero-image {
+    justify-self: center;
+    width: fit-content;
     order: -1;
+    position: relative;
+    display: inline-block;
+    aspect-ratio: 1 / 1;
+    width: clamp(180px, 40vw, 300px);
   }
 
   .hero-image img {
-    margin: 0 auto;
-    width: 180px;
-    height: 180px;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
   }
 }
