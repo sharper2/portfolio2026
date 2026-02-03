@@ -194,8 +194,13 @@ section {
     ),
     repeating-linear-gradient(
       to bottom,
+<<<<<<< HEAD
       rgba(255,255,255,0.125) 0,
       rgba(255,255,255,0.125) 1px,
+=======
+      rgba(255,255,255,0.1) 0,
+      rgba(255,255,255,0.1) 1px,
+>>>>>>> 2cc2c5548899378ba22fab92ffb8f9d81f3b1e8a
       transparent 1px,
       transparent 40px
     );
