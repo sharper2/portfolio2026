@@ -9,21 +9,35 @@ const projects = [
   },
   {
     title: "Peggle-like Physics Demo",
-    description: "A demo of physics similar to the video game Peggle by PopCap. I made this out of love for the source material, but I haven't yet thought of an interesting way to expand on the formula. I'm hoping to come back to the project eventually with new ideas. Coded in C# using MonoGame.",
+    description: "A demo of physics similar to the video game Peggle by PopCap. I made this out of love for the source material, but I haven't yet thought of an interesting way to expand on the original game's formula. I'm hoping to come back to the project eventually with new ideas. Coded in C# using MonoGame.",
     image: "/images/project2.png",
     github: "https://github.com/sharper2/peggle",
+    download: "#"
+  },
+  {
+    title: "Panel de Pon (SNES)",
+    description: "A recreation of Panel de Pon (otherwise known as Tetris Attack) For the Super Nintendo. This is a working project that is still receiving updates. Currently the game builds the grid of panels and allows the user to move across them with the cursor. Coded in C# using MonoGame.",
+    image: "",
+    github: "",
+    download: "#"
+  },
+  {
+    title: "Super Mario Bros. 3 (NES)",
+    description: "A recreation of Super Mario Bros. 3 for the Nintendo Entertainment System. This is a group project for my CSE 3902 class, so I can't post the public GitHub link until the class ends. I'll still try to give development updates regardlesss. Coded in C# using MonoGame.",
+    image: "",
+    github: "",
     download: "#"
   }
 ];
 ---
 
 <section class="projects">
-  <h2>Projects</h2>
+  <h2><span>Projects</span></h2>
   <div class="projects-grid">
     {projects.map(project => (
       <div class="project-card">
-        <img src={project.image} alt={project.title} />
         <h3>{project.title}</h3>
+        <img src={project.image} alt={project.title} />
         <p>{project.description}</p>
         <div class="links">
           <a href={project.github} target="_blank" rel="noopener noreferrer">GitHub</a>

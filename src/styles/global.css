@@ -231,11 +231,35 @@ section {
    ABOUT
    ========================================================= */
 .about {
+  position: relative;
+  overflow: hidden;
   background: var(--bg-section);
   color: var(--text-main);
 }
 
+.about h2 {
+  position: relative;
+}
+
+.about h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent-primary);
+}
+
+.about h2 span {
+  position: relative;
+  background: var(--bg-section); /* match section background */
+  padding-right: 1rem; /* space between text and line */
+  display: inline-block;
+}
+
 .about-grid {
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2.5rem;
@@ -243,6 +267,7 @@ section {
 }
 
 .about-card {
+  z-index: 1;
   background: var(--bg-card);
   padding: 2rem;
   border-radius: var(--radius-lg);
@@ -263,9 +288,31 @@ section {
    ========================================================= */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 2.5rem;
   margin-top: 2rem;
+}
+
+.projects h2 {
+  position: relative;
+  padding-bottom: 0.2rem;
+}
+
+.projects h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent-secondary);
+}
+
+.projects h2 span {
+  position: relative;
+  background: var(--bg-main); /* match section background */
+  padding-right: 1rem; /* space between text and line */
+  display: inline-block;
 }
 
 .project-card {
@@ -275,7 +322,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  border-top: 4px solid var(--accent-secondary);
+  border-bottom: 4px solid var(--accent-secondary);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
