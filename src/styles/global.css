@@ -84,7 +84,7 @@ section {
    HERO
    ========================================================= */
 .hero {
-  min-height: 100vh;
+  min-height: 96vh;
   display: grid;
   place-items: center;
 }
@@ -222,7 +222,7 @@ section {
     background-position: 0 0, 0 0;
   }
   to {
-    background-position: 800px 300px, 800px 300px;
+    background-position: 800px 400px, 800px 400px;
   }
 }
 
