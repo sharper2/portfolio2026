@@ -104,8 +104,8 @@ section {
 
   background: linear-gradient(
     90deg,
-    #33cfff,   /* slightly lighter accent-primary */
-    #ff5c5c    /* slightly lighter accent-secondary */
+    var(--accent-primary),
+    var(--accent-secondary)
   );
 
   background-clip: text;
