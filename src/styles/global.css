@@ -1,6 +1,4 @@
-/* =========================================================
-   DESIGN TOKENS
-   ========================================================= */
+/* DESIGN TOKENS */
 :root {
   --bg-main: #0b0b10;
   --bg-section: #13131a;
@@ -16,9 +14,7 @@
   --radius-md: 12px;
 }
 
-/* =========================================================
-   RESET
-   ========================================================= */
+/* RESET */
 *,
 *::before,
 *::after {
@@ -38,9 +34,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* =========================================================
-   TYPOGRAPHY
-   ========================================================= */
+/* TYPOGRAPHY */
 h1, h2, h3 {
   margin: 0;
   font-family: 'Poppins', system-ui, sans-serif;
@@ -67,10 +61,7 @@ p {
   color: var(--text-muted);
 }
 
-
-/* =========================================================
-   GLOBAL LAYOUT
-   ========================================================= */
+/* GLOBAL LAYOUT */
 section {
   padding: 6rem 2rem;
 }
@@ -80,9 +71,7 @@ section {
   margin: 0 auto;
 }
 
-/* =========================================================
-   HERO
-   ========================================================= */
+/* HERO */
 .hero {
   min-height: 96vh;
   display: grid;
@@ -113,7 +102,7 @@ section {
   color: transparent;
 
   text-shadow: 
-    0 2px 0 rgba(0,0,0,0.5),   /* slightly softer shadow */
+    0 2px 0 rgba(0,0,0,0.5),
     0 8px 28px rgba(0,0,0,0.45);
 }
 
@@ -125,14 +114,13 @@ section {
 
   color: rgba(244,244,246,0.75);
 
-  text-align: center; /* centers the subtitle under the H1 */
+  text-align: center;
 }
 
 
 .hero-image {
   position: relative;
   display: inline-block;
-  /*border-radius: 50%;*/
 }
 
 .hero-image img {
@@ -143,7 +131,7 @@ section {
   height: auto;
   border-radius: 50%;
   position: relative;
-  z-index: 2; /* image on top of glow */
+  z-index: 2;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
@@ -163,8 +151,8 @@ section {
   transform: scale(1.03);
   transform-origin: center;
 
-  filter: blur(14px);      /* less blur makes it tighter */
-  opacity: 0.55;           /* reduced opacity */
+  filter: blur(14px); 
+  opacity: 0.55;           
   z-index: 1;
   animation: rotate-glow 25s linear infinite;
 }
@@ -209,7 +197,6 @@ section {
 }
 
 
-/* ensure hero content is above grid */
 .hero-inner {
   gap: 5rem;
   position: relative;
@@ -227,9 +214,7 @@ section {
 }
 
 
-/* =========================================================
-   ABOUT
-   ========================================================= */
+/* ABOUT */
 .about {
   position: relative;
   overflow: hidden;
@@ -253,8 +238,8 @@ section {
 
 .about h2 span {
   position: relative;
-  background: var(--bg-section); /* match section background */
-  padding-right: 1rem; /* space between text and line */
+  background: var(--bg-section); 
+  padding-right: 1rem; 
   display: inline-block;
 }
 
@@ -283,9 +268,7 @@ section {
   box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
-/* =========================================================
-   PROJECTS
-   ========================================================= */
+/* PROJECTS */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
@@ -310,8 +293,8 @@ section {
 
 .projects h2 span {
   position: relative;
-  background: var(--bg-main); /* match section background */
-  padding-right: 1rem; /* space between text and line */
+  background: var(--bg-main); 
+  padding-right: 1rem; 
   display: inline-block;
 }
 
@@ -354,9 +337,7 @@ section {
   text-decoration: underline;
 }
 
-/* =========================================================
-   CONNECTIONS
-   ========================================================= */
+/* CONNECTIONS */
   .connections h2 {
     display: flex;
     justify-content: center;
@@ -391,9 +372,7 @@ section {
   flex-shrink: 0;
 }
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
+/* RESPONSIVE*/
 @media (max-width: 900px) {
   .about-grid, .projects-grid {
     grid-template-columns: 1fr;

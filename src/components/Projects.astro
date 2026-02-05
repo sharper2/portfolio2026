@@ -1,49 +1,47 @@
 ---
 const projects = [
-  /*{
-    title: "Sam Harper 2025 Portfolio",
-    description: "My prior portfolio made in summer of 2025. It was built using React, and went for a purple space aesthetic.",
-    image: "/images/project1.png",
-    github: "https://github.com/sharper2/sam-harper",
-    download: "#"
-  },*/
   {
     title: "Peggle-like Physics Demo",
-    description: "A demo of physics similar to the video game Peggle by PopCap. I made this out of love for the source material, but I haven't yet thought of an interesting way to expand on the original game's formula. I'm hoping to come back to the project eventually with new ideas. Coded in C# using MonoGame.",
-    image: "",
+    description:
+      "A demo of physics similar to the video game Peggle by PopCap. I made this out of love for the source material, but I haven't yet thought of an interesting way to expand on the original game's formula. I'm hoping to come back to the project eventually with new ideas. Coded in C# using MonoGame.",
     github: "https://github.com/sharper2/peggleLike",
-    //download: "#"
   },
   {
     title: "Panel de Pon (SNES)",
-    description: "A recreation of Panel de Pon (otherwise known as Tetris Attack) for the Super Nintendo. This is a working project that is still receiving updates. Currently the game builds the grid of panels and allows the user to move across them with the cursor. Coded in C# using MonoGame.",
-    image: "",
+    description:
+      "A recreation of Panel de Pon (otherwise known as Tetris Attack) for the Super Nintendo. This is a working project that is still receiving updates. Currently the game builds the grid of panels and allows the user to move across them with the cursor. Coded in C# using MonoGame.",
     github: "https://github.com/sharper2/panelDePon",
-    //download: "#"
   },
   {
     title: "Super Mario Bros. 3 (NES)",
-    description: "A recreation of Super Mario Bros. 3 for the Nintendo Entertainment System. This is a group project for my Game Development class (CSE 3902), so I can't post the public GitHub link until the class ends. I'll still give development updates regardless. Coded in C# using MonoGame.",
-    image: "",
-    //github: "",
-    //download: "#"
+    description:
+      "A recreation of Super Mario Bros. 3 for the Nintendo Entertainment System. This is a group project for my Game Development class (CSE 3902), so I can't post the public GitHub link until the class ends. I'll still give development updates regardless. Coded in C# using MonoGame.",
   }
 ];
 ---
 
 <section class="projects">
   <h2><span>Projects</span></h2>
+
   <div class="projects-grid">
-    {projects.map(project => (
+    {projects.map((project) => (
       <div class="project-card">
         <h3>{project.title}</h3>
-        <img src={project.image} alt={project.title} />
+
         <p>{project.description}</p>
+
         <div class="links">
-          <a href={project.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-          {/* <a href={project.download} target="_blank" rel="noopener noreferrer">Download</a>*/}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          )}
         </div>
       </div>
     ))}
-    </div>
+  </div>
 </section>
