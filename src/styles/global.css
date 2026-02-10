@@ -337,6 +337,18 @@ section {
   text-decoration: underline;
 }
 
+.preview {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
 /* CONNECTIONS */
   .connections h2 {
     display: flex;

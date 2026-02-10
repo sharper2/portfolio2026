@@ -5,6 +5,8 @@ const projects = [
     description:
       "A demo of physics similar to the video game Peggle by PopCap. I made this out of love for the source material, but I haven't yet thought of an interesting way to expand on the original game's formula. I'm hoping to come back to the project eventually with new ideas. Coded in C# using MonoGame.",
     github: "https://github.com/sharper2/peggleLike",
+    previewStatic: "images/peggleLikeClip.png",
+    previewGif: "images/peggleLikeClip.gif"
   },
   {
     title: "Panel de Pon (SNES)",
@@ -16,6 +18,8 @@ const projects = [
     title: "Super Mario Bros. 3 (NES)",
     description:
       "A recreation of Super Mario Bros. 3 for the Nintendo Entertainment System. This is a group project for my Game Development class (CSE 3902), so I can't post the public GitHub link until the class ends. I'll still give development updates regardless. Coded in C# using MonoGame.",
+    previewStatic: "images/smb3clip.png",
+    previewGif: "images/smb3clip.gif"
   }
 ];
 ---
@@ -25,23 +29,107 @@ const projects = [
 
   <div class="projects-grid">
     {projects.map((project) => (
-      <div class="project-card">
-        <h3>{project.title}</h3>
+      <article class="project-card" tabindex="0">
+        <div class="preview">
+          <img
+            src={project.previewStatic}
+            data-static={project.previewStatic}
+            data-gif={project.previewGif}
+            alt={`${project.title} preview`}
+            loading="lazy"
+          />
+        </div>
 
+        <h3>{project.title}</h3>
         <p>{project.description}</p>
 
-        <div class="links">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-          )}
-        </div>
-      </div>
+        {project.github && (
+          <a href={project.github} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+        )}
+      </article>
     ))}
   </div>
 </section>
+
+
+<script>
+  const isMobile = window.matchMedia(
+    "(hover: none), (pointer: coarse), (max-width: 768px)"
+  ).matches;
+
+  const cards = document.querySelectorAll<HTMLElement>(".project-card");
+
+  cards.forEach(card => {
+    const img = card.querySelector<HTMLImageElement>("img");
+    if (!img) return;
+
+    const staticSrc = img.dataset.static;
+    const gifSrc = img.dataset.gif;
+    if (!staticSrc || !gifSrc) return;
+
+    let hovering = false;
+
+    const play = () => {
+      hovering = true;
+      img.src = gifSrc;
+    };
+
+    const stop = () => {
+      hovering = false;
+      img.src = staticSrc;
+    };
+
+    /* ---------- Desktop ---------- */
+    if (!isMobile) {
+      card.addEventListener("mouseenter", play);
+      card.addEventListener("mouseleave", stop);
+    }
+
+    /* ---------- Mobile ---------- */
+    if (isMobile) {
+      card.addEventListener("touchstart", play, { passive: true });
+      card.addEventListener("touchend", stop);
+      card.addEventListener("touchcancel", stop);
+    }
+  });
+
+  /* ---------- Preload GIFs ---------- */
+  document.querySelectorAll<HTMLImageElement>(
+    ".project-card img[data-gif]"
+  ).forEach(img => {
+    const gif = img.dataset.gif;
+    if (!gif) return;
+
+    const preload = new Image();
+    preload.src = gif;
+  });
+
+  /* ---------- Mobile: scroll observer ---------- */
+  if (isMobile) {
+    const imgs = document.querySelectorAll<HTMLImageElement>(
+      ".project-card img"
+    );
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          const img = entry.target as HTMLImageElement;
+          const staticSrc = img.dataset.static;
+          const gifSrc = img.dataset.gif;
+          if (!staticSrc || !gifSrc) return;
+
+          if (entry.isIntersecting) {
+            img.src = gifSrc;
+          } else {
+            img.src = staticSrc;
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    imgs.forEach(img => observer.observe(img));
+  }
+</script>
