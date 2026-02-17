@@ -8,12 +8,12 @@ const projects = [
     previewStatic: "images/peggleLikeClip.png",
     previewGif: "images/peggleLikeClip.gif"
   },
-  {
+  /*{
     title: "Panel de Pon (SNES)",
     description:
       "A recreation of Panel de Pon (otherwise known as Tetris Attack) for the Super Nintendo. This is a working project that is still receiving updates. Currently the game builds the grid of panels and allows the user to move across them with the cursor. Coded in C# using MonoGame.",
     github: "https://github.com/sharper2/panelDePon",
-  },
+  },*/
   {
     title: "Super Mario Bros. 3 (NES)",
     description:
@@ -81,13 +81,13 @@ const projects = [
       img.src = staticSrc;
     };
 
-    /* ---------- Desktop ---------- */
+    /* For desktop */
     if (!isMobile) {
       card.addEventListener("mouseenter", play);
       card.addEventListener("mouseleave", stop);
     }
 
-    /* ---------- Mobile ---------- */
+    /* For mobile */
     if (isMobile) {
       card.addEventListener("touchstart", play, { passive: true });
       card.addEventListener("touchend", stop);
@@ -95,7 +95,7 @@ const projects = [
     }
   });
 
-  /* ---------- Preload GIFs ---------- */
+  /* Preload GIFs */
   document.querySelectorAll<HTMLImageElement>(
     ".project-card img[data-gif]"
   ).forEach(img => {
@@ -106,7 +106,7 @@ const projects = [
     preload.src = gif;
   });
 
-  /* ---------- Mobile: scroll observer ---------- */
+  /*Mobile scroll observer */
   if (isMobile) {
     const imgs = document.querySelectorAll<HTMLImageElement>(
       ".project-card img"
