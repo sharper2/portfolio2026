@@ -1,0 +1,298 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project: CollectionEntry<'projects'>) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+
+
+const { project }: Props = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout>
+  <section class="project-page">
+    <div class="section-inner">
+      <header class="project-header">
+        <p class="eyebrow">Project Breakdown</p>
+        <h1>{project.data.title}</h1>
+        <p class="project-summary">{project.data.description}</p>
+        {project.data.itchLink && (
+          <a href={project.data.itchLink} target="_blank" rel="noopener noreferrer" class="play-button">
+            ▶ Play on Itch.io!
+          </a>
+        )}
+      </header>
+
+      <article class="project-content">
+        <Content />
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-page {
+    background: var(--bg-section);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        to right,
+        rgba(255,255,255,0.02) 0,
+        rgba(255,255,255,0.02) 3px,
+        transparent 2px,
+        transparent 50px
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02) 0,
+        rgba(255,255,255,0.02) 3px,
+        transparent 2px,
+        transparent 50px
+      );
+    background-size: 50px 50px;
+    animation: grid-scroll-slow 60s linear infinite;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  @keyframes grid-scroll-slow {
+    from {
+      background-position: 0 0, 0 0;
+    }
+    to {
+      background-position: 1000px 500px, 1000px 500px;
+    }
+  }
+
+  .project-page .section-inner {
+    max-width: 1400px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-header {
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-summary {
+    max-width: 70ch;
+    margin-top: 1rem;
+  }
+
+  .play-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(
+      135deg,
+      var(--accent-primary),
+      var(--accent-secondary)
+    );
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: var(--radius-md);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
+  }
+
+  .play-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
+  }
+
+  .project-content {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border-bottom: 4px solid var(--accent-secondary);
+    padding: 2rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-content :global(h2) {
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    clear: both;
+  }
+
+  .project-content :global(p) {
+    margin: 0;
+  }
+
+  .project-content :global(img) {
+    width: 100%;
+    border-radius: var(--radius-md);
+    display: block;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .project-content :global(img[src*="levelDesignPreview"]) {
+    filter: brightness(0.68) contrast(1.9) saturate(1.9);
+  }
+
+  .project-content :global(.project-row) {
+    display: grid;
+    gap: 1.25rem;
+    align-items: start;
+    margin-bottom: 0.75rem;
+    clear: both;
+  }
+
+  .project-content :global(.project-row h2) {
+    margin-top: 0;
+  }
+
+  .project-content :global(.project-media) {
+    margin: 0;
+    height: 100%;
+  }
+
+  .project-content :global(.project-media img) {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .project-content :global(.project-media-group) {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-content :global(.project-media-pair) {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-content :global(.project-text) {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-content :global(.project-text p) {
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .project-content {
+      padding: 2.5rem 3rem;
+    }
+
+    .project-content :global(.project-row) {
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+
+    .project-content :global(.project-row.reverse) {
+      grid-template-columns: minmax(320px, 1fr) minmax(0, 1.2fr);
+    }
+
+    .project-content :global(.project-row.reverse .project-media) {
+      order: -1;
+    }
+
+    .project-content :global(.project-row.reverse .project-media-pair) {
+      order: -1;
+    }
+
+    .project-content :global(.project-row > .project-media) {
+      max-height: 400px;
+      display: flex;
+      align-items: center;
+    }
+
+    .project-content :global(.project-row > .project-media img) {
+      max-height: 400px;
+    }
+
+    .project-content :global(.project-row > .project-media-pair) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      max-height: 400px;
+    }
+
+    .project-content :global(.project-row > .project-media-pair .project-media) {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .project-content :global(.project-row > .project-media-pair img) {
+      max-height: 400px;
+    }
+
+    .project-content :global(.project-media-group) {
+      display: grid;
+      gap: 1rem;
+      max-height: 400px;
+      grid-template-rows: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      min-height: 0;
+    }
+
+    .project-content :global(.project-media-pair) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .project-content :global(.project-media-pair .project-media) {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .project-content :global(.project-media-pair img) {
+      max-height: 100%;
+    }
+
+    .project-content :global(.project-media-group > .project-media) {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .project-content :global(.project-media-group > .project-media img) {
+      max-height: 100%;
+    }
+  }
+</style>
