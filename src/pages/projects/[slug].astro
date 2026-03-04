@@ -48,6 +48,7 @@ const { Content } = await project.render();
     min-height: 100vh;
     position: relative;
     overflow: hidden;
+    padding: 4.5rem 1rem;
   }
 
   .project-page::before {
@@ -134,7 +135,7 @@ const { Content } = await project.render();
     background: var(--bg-card);
     border-radius: var(--radius-lg);
     border-bottom: 4px solid var(--accent-secondary);
-    padding: 2rem;
+    padding: 1.4rem;
     display: grid;
     gap: 1rem;
   }
@@ -203,6 +204,30 @@ const { Content } = await project.render();
 
   .project-content :global(.project-text p) {
     margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .project-page {
+      padding: 3.5rem 0.75rem;
+    }
+
+    .project-header {
+      margin-bottom: 1.25rem;
+    }
+
+    .project-content {
+      padding: 1.1rem;
+      gap: 0.9rem;
+    }
+
+    .project-content :global(.project-row) {
+      gap: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-content :global(.project-media-pair) {
+      gap: 0.65rem;
+    }
   }
 
   @media (min-width: 1024px) {
