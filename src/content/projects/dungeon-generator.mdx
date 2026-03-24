@@ -1,0 +1,52 @@
+---
+title: "Dungeon Generator"
+description: "A reusable Unity library for procedural tile-based dungeon generation built around a graph-based architecture."
+images: ["/images/dungeonGeneratorGizmos.png", "/images/dungeonArchitectureDiagram.png"]
+githubLink: "https://github.com/YOUR_USERNAME/DungeonGenerator"
+---
+
+<div class="project-row">
+	<div class="project-text">
+		<h2>Project Goals and Intro</h2>
+        <p>As I began thinking about future game projects in Unity, I noticed a common thread between two very different genres I wanted to explore: a first-person dungeon crawler in the style of something like Wizardry, and an isometric roguelike in the style of The Binding of Isaac. Both genres are typically tile-based, and require procedurally generated levels. Rather than building a generator tailored to each genre individually, I decided to step back and attempt to create a reusable system that could fit both.</p>
+        <p>The goal of this project was to build that system, a general procedural dungeon generator designed as a standalone Unity library, flexible enough to be dropped into future projects of different genres without modification. Along the way I had to think carefully about where to generalize and where not to, which turned out to be the most interesting design challenge of the project.</p>
+	</div>
+	<div class="project-media">
+		<img src="/images/dungeonGeneratorGizmos.png" alt="Gizmos visualizer showing a generated dungeon graph" />
+	</div>
+</div>
+
+<div class="project-row reverse">
+	<div class="project-text">
+		<h2>The Core Design Decision</h2>
+        <p>The central question I had to answer early on was how far to take the generalization. A dungeon crawler typically has long corridors connecting sparse rooms across a large grid. An isometric roguelike typically has a tighter grid of self-contained rooms with nearly invisible transitions between them. These feel very different, but I realized the difference is almost entirely in how the map is rendered, not in what the map actually is at a data level. Both can be represented as a graph of nodes connected by edges.</p>
+        <p>This led me to a two-layer architecture: a topology layer that the generator would produce, and a geometry layer that each game would implement on its own. The generator's job is only to produce an abstract graph describing which spaces exist, where they are, and how they connect. What those spaces actually look like in 3D or isometric view is left entirely to the game utilizing the library. This separation keeps the shared system lean and avoids the trap of trying to generalize rendering logic that fundamentally differs between genres.</p>
+	</div>
+	<div class="project-media">
+		<img src="/images/dungeonArchitectureDiagram.png" alt="Diagram of the two-layer topology and geometry architecture" />
+	</div>
+</div>
+
+<div class="project-row">
+	<div class="project-text">
+		<h2>How Generation Works</h2>
+        <p>The generator runs in five sequential passes. First, rooms are placed randomly on a coarse grid, with overlap and proximity checks preventing rooms from touching. Second, a minimum spanning tree pass connects all rooms using a nearest-neighbor algorithm, guaranteeing that every room is reachable from every other room. Third, a loop injection pass randomly adds extra connections between nearby rooms, introducing cycles that make layouts feel less like a tree and more like an explorable space. Fourth, a breadth-first search assigns every node a depth value representing its distance from the start. Finally, the shallowest node is tagged as the Start and the deepest as the Exit.</p>
+        <p>Every generation run is controlled by a seed value, making output fully reproducible. The same seed always produces the same dungeon, which is helpful for debugging and could be useful for features like daily challenge levels in games that use the library. All generation parameters—grid size, room count, room size range, loop probability—are exposed through a settings object that appears as an editable block in the Unity inspector.</p>
+	</div>
+</div>
+
+<div class="project-row reverse">
+	<div class="project-text">
+		<h2>Data Model and Testing</h2>
+        <p>The underlying data model consists of three core classes. A DungeonNode represents a single space on the grid, storing its position, type, size, depth, and an open metadata dictionary for data specific to the game. A DungeonEdge represents a confirmed passage between two nodes, storing which nodes it connects, the direction of the passage, and the passage type such as open, locked, or secret. A DungeonGraph is the container that owns all nodes and edges, maintaining both a spatial index for O(1) position lookups and an adjacency index for O(1) neighbor lookups.</p>
+        <p>With the data model and generator separated from Unity rendering code, the generation logic can be tested as pure C# using Unity's EditMode test framework. Tests verify the basic requirements on every run: that the graph is connected, that start and exit nodes are always assigned, and that the same seed always produces identical output. A fuzz test runs generation across a large range of seeds to catch any edge cases that cause exceptions or invalid graphs.</p>
+	</div>
+</div>
+
+<div class="project-row">
+	<div class="project-text">
+		<h2>Outcomes and Next Steps</h2>
+        <p>The result is a working dungeon generation library that produces varied, connected layouts with controllable parameters and a debug visualizer for inspecting output directly in the Unity editor. More importantly, the architecture is in a shape where adding a new generator strategy, such as a corridor-first generator suited to the dungeon crawler genre, requires no changes to the data model or any future code that uses the graph.</p>
+        <p>The next steps for the project are building out that second generator strategy, allowing generated dungeons to be saved and reloaded, and eventually integrating the library into one of the two game genres it was designed to for. This project has already shifted how I think about building game systems. Designing for reuse from the start is more work upfront, but the payoff of having a robust, flexible foundation to build on is well worth it.</p>
+	</div>
+</div>
