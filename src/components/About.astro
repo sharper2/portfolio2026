@@ -1,16 +1,81 @@
-<section class="about">
-  <h2><span>About Me</span></h2>
-  <div class="about-grid">
-    <div class="about-card">
-      <h3>Education</h3>
-      <p>Currently studying Computer Science & Engineering with a specialization in Computer Graphics & Game Design at The Ohio State University. I'm in my second year of school, and I'm expecting to graduate in Spring 2028. Apart from my studies, I'm also a member of The Best Damn Band in the Land where I play trombone, and help to continue the university's tradition of musical and marching excellence.</p>
+---
+const base = import.meta.env.BASE_URL;
+
+const photos = [
+  {
+    src: `${base}images/sam-moher.jpeg`,
+    alt: 'Sam Harper at the Cliffs of Moher',
+  },
+  {
+    src: `${base}images/sam-kilkenny.jpeg`,
+    alt: 'Sam Harper in Kilkenny',
+  },
+];
+---
+
+<section class="about-me" id="about">
+  <div class="section-inner">
+    <h2><span>About Me</span></h2>
+
+    <div class="about-me__layout">
+      <figure class="about-me__photo" data-photo-rotate={photos.length > 1}>
+        {photos.map((photo, index) => (
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            width="1168"
+            height="1340"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            data-photo-index={index}
+            class:list={['about-me__photo-img', { 'is-active': index === 0 }]}
+          />
+        ))}
+      </figure>
+
+      <div class="about-me__content">
+        <p>
+          I'm a software engineer and game developer studying Computer Science &amp; Engineering at
+          The Ohio State University, with a specialization in Computer Graphics &amp; Game Design.
+          I like building things that feel good to use — whether that's a web app, a game system,
+          or a small tool that saves someone five minutes.
+        </p>
+        <p>
+          Right now I'm working as a Software Engineering Intern at Cincinnati Children's Hospital
+          Medical Center. Outside of work and school, I'm a trombonist in The Ohio State University
+          Marching Band, and I spend a lot of time playing games, reading, writing, and making things.
+        </p>
+
+        <div class="about-me__education">
+          <h3>Education</h3>
+          <p>
+            <strong>The Ohio State University</strong> — B.S. Computer Science &amp; Engineering,
+            Computer Graphics &amp; Game Design specialization · Expected Spring 2028
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="about-card">
-      <h3>Skills</h3>
-      <p>I'm proficient in C#, C, Java, JavaScript, HTML, and CSS. C# is my personal favorite of the languages I've learned. I've also taken classes using Matlab and Assembly. Some of my most used tools lately are MonoGame and Unity for game development, and Astro for web-based projects.</p>
-    </div>
-    <div class="about-card">
-      <h3>Interests</h3>
-      <p>I like creating unique and engaging experiences. I enjoy finding the perfect balance between functionality and ease of use. I like to design with one primary focus at the center of everything, while still paying attention to the details. Above all else, I hope to find mentors that help me actualize my dreams of creating unique and impactful products for others.</p>
-    </div>
+  </div>
 </section>
+
+{photos.length > 1 && (
+  <script>
+    const figure = document.querySelector<HTMLElement>('.about-me__photo[data-photo-rotate="true"]');
+    if (!figure) throw new Error('Photo figure not found');
+
+    const images = Array.from(figure.querySelectorAll<HTMLImageElement>('.about-me__photo-img'));
+    if (images.length < 2) throw new Error('Not enough images to rotate');
+
+    let activeIndex = 0;
+
+    const showPhoto = (index: number) => {
+      images[activeIndex]?.classList.remove('is-active');
+      activeIndex = index;
+      images[activeIndex]?.classList.add('is-active');
+    };
+
+    window.setInterval(() => {
+      showPhoto((activeIndex + 1) % images.length);
+    }, 6000);
+  </script>
+)}
