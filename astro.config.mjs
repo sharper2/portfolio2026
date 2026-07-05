@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://samharper.net',
+    base: '/portfolio',
     output: 'static',
     integrations: [mdx()]
 });
