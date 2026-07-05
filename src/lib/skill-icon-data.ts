@@ -1,14 +1,12 @@
 import {
   siAngular,
   siAstro,
-  siC,
-  siDotnet,
   siGithubactions,
   siJavascript,
   siJest,
   siJira,
+  siMonogame,
   siMui,
-  siOpenjdk,
   siRadixui,
   siReact,
   siTailwindcss,
@@ -18,6 +16,7 @@ import {
 } from 'simple-icons';
 
 import type { SkillIconId } from './skill-icons';
+import { assetUrl } from './asset-url';
 
 export type SkillIconData = {
   title: string;
@@ -45,12 +44,15 @@ function contrastHex(hex: string): string {
     .toUpperCase();
 }
 
-const iconById: Record<Exclude<SkillIconId, 'monogame'>, SimpleIcon> = {
-  csharp: siDotnet,
-  java: siOpenjdk,
+const imageIconById: Partial<Record<SkillIconId, { title: string; path: string }>> = {
+  csharp: { title: 'C#', path: 'icons/csharp-logo.svg' },
+  java: { title: 'Java', path: 'icons/java-logo.svg' },
+  c: { title: 'C', path: 'icons/c-logo.svg' },
+};
+
+const iconById: Partial<Record<SkillIconId, SimpleIcon>> = {
   typescript: siTypescript,
   javascript: siJavascript,
-  c: siC,
   react: siReact,
   mui: siMui,
   angular: siAngular,
@@ -58,20 +60,27 @@ const iconById: Record<Exclude<SkillIconId, 'monogame'>, SimpleIcon> = {
   astro: siAstro,
   tailwindcss: siTailwindcss,
   unity: siUnity,
+  monogame: siMonogame,
   jest: siJest,
   githubactions: siGithubactions,
   agile: siJira,
 };
 
 export function getSkillIconData(id: SkillIconId, baseUrl: string): SkillIconData {
-  if (id === 'monogame') {
+  const imageIcon = imageIconById[id];
+
+  if (imageIcon) {
     return {
-      title: 'MonoGame',
-      imageSrc: `${baseUrl}icons/monogame-logo.png`,
+      title: imageIcon.title,
+      imageSrc: assetUrl(baseUrl, imageIcon.path),
     };
   }
 
   const icon = iconById[id];
+
+  if (!icon) {
+    throw new Error(`Missing skill icon data for "${id}"`);
+  }
 
   return {
     title: icon.title,

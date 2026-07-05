@@ -1,6 +1,8 @@
 ---
 import SkillIcon from './SkillIcon.astro';
+import SkillExperienceList from './SkillExperienceList.astro';
 import type { SkillIconId } from '../lib/skill-icons';
+import { assetUrl } from '../lib/asset-url';
 
 const base = import.meta.env.BASE_URL;
 
@@ -43,7 +45,7 @@ const skillGroups: SkillGroup[] = [
           {
             title: 'Dungeon Generator',
             detail: 'Standalone Unity library for procedural dungeon generation.',
-            href: `${base}projects/dungeon-generator`,
+            href: assetUrl(base, 'projects/dungeon-generator'),
           },
         ],
       },
@@ -189,12 +191,12 @@ const skillGroups: SkillGroup[] = [
           {
             title: 'Temporal Stasis',
             detail: 'Gameplay programming and level design for a 2D puzzle platformer at Game I/O 2026.',
-            href: `${base}projects/temporal-stasis`,
+            href: assetUrl(base, 'projects/temporal-stasis'),
           },
           {
             title: 'Dungeon Generator',
             detail: 'Reusable Unity library for procedural, tile-based dungeon generation (Unity 6).',
-            href: `${base}projects/dungeon-generator`,
+            href: assetUrl(base, 'projects/dungeon-generator'),
           },
         ],
       },
@@ -260,7 +262,16 @@ const skillGroups: SkillGroup[] = [
     ],
   },
 ];
-const skills = skillGroups.flatMap((group) => group.skills);
+
+function chunkSkills<T>(items: T[], size: number): T[][] {
+  const rows: T[][] = [];
+
+  for (let i = 0; i < items.length; i += size) {
+    rows.push(items.slice(i, i + size));
+  }
+
+  return rows;
+}
 ---
 
 <section class="skills" id="skills">
@@ -270,40 +281,163 @@ const skills = skillGroups.flatMap((group) => group.skills);
       Click a skill to see where I've used it. Links go to project writeups when available.
     </p>
 
-    <div class="skills-grid">
-      {skills.map((skill) => (
-        <details class="skill-item">
-          <summary class="skill-item__trigger">
-            <span class="skill-item__icon">
-              <SkillIcon icon={skill.icon} />
-            </span>
-            <span class="skill-item__label">{skill.name}</span>
-          </summary>
+    <div class="skills-groups skills-groups--desktop">
+      {skillGroups.map((group) => (
+        <section class="skills-group" aria-labelledby={`skills-group-${group.id}`}>
+          <h3 class="skills-group__title" id={`skills-group-${group.id}`}>{group.title}</h3>
 
-          <div class="skill-item__dropdown">
-            <div class="skill-item__dropdown-inner">
-              <ul class="skill-item__list">
-                {skill.experience.map((item) => (
-                  <li>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        target={item.href.startsWith('http') ? '_blank' : undefined}
-                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      >
-                        {item.title}
-                      </a>
-                    ) : (
-                      <strong>{item.title}</strong>
-                    )}
-                    <p>{item.detail}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div class="skills-grid skills-grid--desktop">
+            {group.skills.map((skill) => (
+              <details class="skill-item">
+                <summary class="skill-item__trigger">
+                  <span class="skill-item__icon">
+                    <SkillIcon icon={skill.icon} />
+                  </span>
+                  <span class="skill-item__label">{skill.name}</span>
+                </summary>
+
+                <div class="skill-item__dropdown">
+                  <div class="skill-item__dropdown-inner">
+                    <SkillExperienceList experience={skill.experience} />
+                  </div>
+                </div>
+              </details>
+            ))}
           </div>
-        </details>
+        </section>
+      ))}
+    </div>
+
+    <div class="skills-groups skills-groups--mobile">
+      {skillGroups.map((group) => (
+        <section class="skills-group" aria-labelledby={`skills-group-mobile-${group.id}`}>
+          <h3 class="skills-group__title" id={`skills-group-mobile-${group.id}`}>{group.title}</h3>
+
+          <div class="skills-mobile">
+            {chunkSkills(group.skills, 2).map((row) => (
+              <div class="skills-row" data-skills-row>
+                <div class="skills-row__triggers">
+                  {row.map((skill) => (
+                    <button
+                      type="button"
+                      class="skill-item__trigger skill-item__trigger--mobile"
+                      data-skill-trigger
+                      aria-expanded="false"
+                    >
+                      <span class="skill-item__icon">
+                        <SkillIcon icon={skill.icon} />
+                      </span>
+                      <span class="skill-item__label">{skill.name}</span>
+                    </button>
+                  ))}
+                  {row.length === 1 && <span class="skills-row__spacer" aria-hidden="true"></span>}
+                </div>
+
+                <div class="skills-row__dropdown" data-skills-row-dropdown>
+                  <div class="skills-row__dropdown-inner">
+                    {row.map((skill) => (
+                      <div class="skills-row__panel" data-skill-panel hidden>
+                        <SkillExperienceList experience={skill.experience} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       ))}
     </div>
   </div>
 </section>
+
+<script is:inline>
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const collapseDurationMs = 470;
+
+  function afterCollapseTransition(element, callback) {
+    if (prefersReducedMotion) {
+      callback();
+      return;
+    }
+
+    let finished = false;
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      element.removeEventListener('transitionend', onTransitionEnd);
+      window.clearTimeout(fallbackTimer);
+      callback();
+    };
+
+    const onTransitionEnd = (event) => {
+      if (event.target !== element || event.propertyName !== 'grid-template-rows') return;
+      finish();
+    };
+
+    element.addEventListener('transitionend', onTransitionEnd);
+    const fallbackTimer = window.setTimeout(finish, collapseDurationMs);
+  }
+
+  document.querySelectorAll('[data-skills-row]').forEach((row) => {
+    const dropdown = row.querySelector('[data-skills-row-dropdown]');
+    const panels = Array.from(row.querySelectorAll('[data-skill-panel]'));
+    const triggers = Array.from(row.querySelectorAll('[data-skill-trigger]'));
+
+    if (!dropdown || panels.length === 0 || triggers.length === 0) return;
+
+    const closeRow = () => {
+      triggers.forEach((trigger) => {
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+      dropdown.classList.remove('is-open');
+
+      afterCollapseTransition(dropdown, () => {
+        panels.forEach((panel) => {
+          panel.hidden = true;
+        });
+      });
+    };
+
+    triggers.forEach((trigger, index) => {
+      trigger.addEventListener('click', () => {
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+        if (isOpen) {
+          closeRow();
+          return;
+        }
+
+        triggers.forEach((otherTrigger, otherIndex) => {
+          const expanded = otherIndex === index;
+          otherTrigger.setAttribute('aria-expanded', String(expanded));
+          if (panels[otherIndex]) {
+            panels[otherIndex].hidden = !expanded;
+          }
+        });
+
+        dropdown.classList.add('is-open');
+      });
+    });
+  });
+
+  document.querySelectorAll('.skills-grid--desktop .skill-item').forEach((details) => {
+    const summary = details.querySelector('summary');
+    const dropdown = details.querySelector('.skill-item__dropdown');
+
+    if (!summary || !dropdown) return;
+
+    summary.addEventListener('click', (event) => {
+      if (!details.open) return;
+
+      event.preventDefault();
+      details.classList.add('is-closing');
+
+      afterCollapseTransition(dropdown, () => {
+        details.open = false;
+        details.classList.remove('is-closing');
+      });
+    });
+  });
+</script>
