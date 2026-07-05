@@ -3,14 +3,23 @@ import { assetUrl } from '../lib/asset-url';
 
 const base = import.meta.env.BASE_URL;
 
+const MOHER_WIDTH = 1168;
+const MOHER_HEIGHT = 1340;
+
 const photos = [
   {
     src: assetUrl(base, 'images/sam-moher.jpeg'),
     alt: 'Sam Harper at the Cliffs of Moher',
+    width: MOHER_WIDTH,
+    height: MOHER_HEIGHT,
+    crop: 'moher',
   },
   {
     src: assetUrl(base, 'images/sam-kilkenny.jpeg'),
     alt: 'Sam Harper in Kilkenny',
+    width: 4032,
+    height: 3024,
+    crop: 'kilkenny',
   },
 ];
 ---
@@ -20,17 +29,25 @@ const photos = [
     <h2><span>About Me</span></h2>
 
     <div class="about-me__layout">
-      <figure class="about-me__photo" data-photo-rotate={photos.length > 1}>
+      <figure
+        class="about-me__photo"
+        data-photo-rotate={photos.length > 1}
+        style={`aspect-ratio: ${MOHER_WIDTH} / ${MOHER_HEIGHT}`}
+      >
         {photos.map((photo, index) => (
           <img
             src={photo.src}
             alt={photo.alt}
-            width="1168"
-            height="1340"
+            width={photo.width}
+            height={photo.height}
             loading={index === 0 ? 'eager' : 'lazy'}
             decoding="async"
             data-photo-index={index}
-            class:list={['about-me__photo-img', { 'is-active': index === 0 }]}
+            class:list={[
+              'about-me__photo-img',
+              `about-me__photo-img--${photo.crop}`,
+              { 'is-active': index === 0 },
+            ]}
           />
         ))}
       </figure>

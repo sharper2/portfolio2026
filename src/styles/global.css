@@ -266,6 +266,8 @@ section {
   width: 100%;
   max-width: 360px;
   aspect-ratio: 1168 / 1340;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
 }
 
 .about-me__photo::before {
@@ -300,6 +302,15 @@ section {
 
 .about-me__photo-img.is-active {
   opacity: 1;
+}
+
+.about-me__photo-img--moher {
+  object-position: center center;
+}
+
+.about-me__photo-img--kilkenny {
+  object-position: 60% center;
+  transform: scale(1.22);
 }
 
 .about-me__content {
