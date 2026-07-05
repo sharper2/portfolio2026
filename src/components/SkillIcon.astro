@@ -1,0 +1,46 @@
+---
+import type { SkillIconId } from '../lib/skill-icons';
+import { getSkillIconData } from '../lib/skill-icon-data';
+
+interface Props {
+  icon: SkillIconId;
+}
+
+const base = import.meta.env.BASE_URL;
+const { icon } = Astro.props;
+const iconData = getSkillIconData(icon, base);
+---
+
+{iconData.imageSrc ? (
+  <img
+    class="skill-icon skill-icon--image"
+    src={iconData.imageSrc}
+    alt=""
+    width="64"
+    height="64"
+    loading="lazy"
+    decoding="async"
+  />
+) : (
+  <svg
+    class="skill-icon"
+    viewBox="0 0 24 24"
+    role="img"
+    aria-label={iconData.title}
+    fill={`#${iconData.hex}`}
+  >
+    <path d={iconData.path} />
+  </svg>
+)}
+
+<style>
+  .skill-icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .skill-icon--image {
+    object-fit: contain;
+  }
+</style>

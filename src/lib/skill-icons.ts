@@ -1,0 +1,17 @@
+export type SkillIconId =
+  | 'csharp'
+  | 'java'
+  | 'typescript'
+  | 'javascript'
+  | 'c'
+  | 'react'
+  | 'mui'
+  | 'angular'
+  | 'radix'
+  | 'astro'
+  | 'tailwindcss'
+  | 'unity'
+  | 'monogame'
+  | 'jest'
+  | 'githubactions'
+  | 'agile';
