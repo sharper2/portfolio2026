@@ -283,69 +283,81 @@ function chunkSkills<T>(items: T[], size: number): T[][] {
 
     <div class="skills-groups skills-groups--desktop">
       {skillGroups.map((group) => (
-        <section class="skills-group" aria-labelledby={`skills-group-${group.id}`}>
-          <h3 class="skills-group__title" id={`skills-group-${group.id}`}>{group.title}</h3>
+        <details class="skills-group" open>
+          <summary class="skills-group__summary">
+            <span class="skills-group__title">{group.title}</span>
+          </summary>
 
-          <div class="skills-grid skills-grid--desktop">
-            {group.skills.map((skill) => (
-              <details class="skill-item">
-                <summary class="skill-item__trigger">
-                  <span class="skill-item__icon">
-                    <SkillIcon icon={skill.icon} />
-                  </span>
-                  <span class="skill-item__label">{skill.name}</span>
-                </summary>
+          <div class="skills-group__content">
+            <div class="skills-group__content-inner">
+              <div class="skills-grid skills-grid--desktop">
+                {group.skills.map((skill) => (
+                  <details class="skill-item">
+                    <summary class="skill-item__trigger">
+                      <span class="skill-item__icon">
+                        <SkillIcon icon={skill.icon} />
+                      </span>
+                      <span class="skill-item__label">{skill.name}</span>
+                    </summary>
 
-                <div class="skill-item__dropdown">
-                  <div class="skill-item__dropdown-inner">
-                    <SkillExperienceList experience={skill.experience} />
-                  </div>
-                </div>
-              </details>
-            ))}
+                    <div class="skill-item__dropdown">
+                      <div class="skill-item__dropdown-inner">
+                        <SkillExperienceList experience={skill.experience} />
+                      </div>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
           </div>
-        </section>
+        </details>
       ))}
     </div>
 
     <div class="skills-groups skills-groups--mobile">
       {skillGroups.map((group) => (
-        <section class="skills-group" aria-labelledby={`skills-group-mobile-${group.id}`}>
-          <h3 class="skills-group__title" id={`skills-group-mobile-${group.id}`}>{group.title}</h3>
+        <details class="skills-group" open>
+          <summary class="skills-group__summary">
+            <span class="skills-group__title">{group.title}</span>
+          </summary>
 
-          <div class="skills-mobile">
-            {chunkSkills(group.skills, 2).map((row) => (
-              <div class="skills-row" data-skills-row>
-                <div class="skills-row__triggers">
-                  {row.map((skill) => (
-                    <button
-                      type="button"
-                      class="skill-item__trigger skill-item__trigger--mobile"
-                      data-skill-trigger
-                      aria-expanded="false"
-                    >
-                      <span class="skill-item__icon">
-                        <SkillIcon icon={skill.icon} />
-                      </span>
-                      <span class="skill-item__label">{skill.name}</span>
-                    </button>
-                  ))}
-                  {row.length === 1 && <span class="skills-row__spacer" aria-hidden="true"></span>}
-                </div>
+          <div class="skills-group__content">
+            <div class="skills-group__content-inner">
+              <div class="skills-mobile">
+                {chunkSkills(group.skills, 2).map((row) => (
+                  <div class="skills-row" data-skills-row>
+                    <div class="skills-row__triggers">
+                      {row.map((skill) => (
+                        <button
+                          type="button"
+                          class="skill-item__trigger skill-item__trigger--mobile"
+                          data-skill-trigger
+                          aria-expanded="false"
+                        >
+                          <span class="skill-item__icon">
+                            <SkillIcon icon={skill.icon} />
+                          </span>
+                          <span class="skill-item__label">{skill.name}</span>
+                        </button>
+                      ))}
+                      {row.length === 1 && <span class="skills-row__spacer" aria-hidden="true"></span>}
+                    </div>
 
-                <div class="skills-row__dropdown" data-skills-row-dropdown>
-                  <div class="skills-row__dropdown-inner">
-                    {row.map((skill) => (
-                      <div class="skills-row__panel" data-skill-panel hidden>
-                        <SkillExperienceList experience={skill.experience} />
+                    <div class="skills-row__dropdown" data-skills-row-dropdown>
+                      <div class="skills-row__dropdown-inner">
+                        {row.map((skill) => (
+                          <div class="skills-row__panel" data-skill-panel hidden>
+                            <SkillExperienceList experience={skill.experience} />
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </section>
+        </details>
       ))}
     </div>
   </div>
@@ -418,6 +430,25 @@ function chunkSkills<T>(items: T[], size: number): T[][] {
         });
 
         dropdown.classList.add('is-open');
+      });
+    });
+  });
+
+  document.querySelectorAll('.skills-group').forEach((details) => {
+    const summary = details.querySelector('.skills-group__summary');
+    const content = details.querySelector('.skills-group__content');
+
+    if (!summary || !content) return;
+
+    summary.addEventListener('click', (event) => {
+      if (!details.open) return;
+
+      event.preventDefault();
+      details.classList.add('is-closing');
+
+      afterCollapseTransition(content, () => {
+        details.open = false;
+        details.classList.remove('is-closing');
       });
     });
   });

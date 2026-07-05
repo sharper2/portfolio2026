@@ -1,0 +1,46 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  class:list={['site-logo', className]}
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="-8 -8 180.4 179.9"
+  aria-hidden="true"
+>
+  <polyline
+    class="site-logo__stroke site-logo__stroke--primary"
+    fill="none"
+    stroke-width="16"
+    stroke-miterlimit="10"
+    points="3.96 6.95 135.43 81.95 3.96 156.95"
+  ></polyline>
+  <polyline
+    class="site-logo__stroke site-logo__stroke--secondary"
+    fill="none"
+    stroke-width="16"
+    stroke-miterlimit="10"
+    points="160.43 6.95 28.96 81.95 160.43 156.95"
+  ></polyline>
+</svg>
+
+<style>
+  .site-logo {
+    display: block;
+    width: 1.85rem;
+    height: 1.85rem;
+    flex-shrink: 0;
+  }
+
+  .site-logo__stroke--primary {
+    stroke: var(--accent-primary);
+  }
+
+  .site-logo__stroke--secondary {
+    stroke: var(--accent-secondary);
+  }
+</style>

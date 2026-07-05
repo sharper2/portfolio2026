@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Ohio State University">
+  <path
+    fill="#BB0000"
+    fill-rule="evenodd"
+    d="M256 24 448 88v336l-192 64L64 424V88L256 24Zm0 64L152 136v240l104 48 104-48V136L256 88Zm0 88c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88Z"
+  />
+</svg>

@@ -1,1 +1,16 @@
-<svg version="1.1" viewBox="0.0 0.0 32.0 32.0" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><clipPath id="p.0"><path d="m0 0l32.0 0l0 32.0l-32.0 0l0 -32.0z" clip-rule="nonzero"/></clipPath><g clip-path="url(#p.0)"><path fill="#000000" fill-opacity="0.0" d="m0 0l32.0 0l0 32.0l-32.0 0z" fill-rule="evenodd"/><path fill="#000000" fill-opacity="0.0" d="m2.562992 1.7926509l25.637794 14.204724" fill-rule="evenodd"/><path stroke="#b4a7d6" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m2.562992 1.7926509l25.637794 14.204724" fill-rule="evenodd"/><path fill="#000000" fill-opacity="0.0" d="m2.562992 30.20735l25.637794 -14.204725" fill-rule="evenodd"/><path stroke="#b4a7d6" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m2.562992 30.20735l25.637794 -14.204725" fill-rule="evenodd"/><path fill="#b4a7d6" d="m25.887138 14.299212l3.2440948 0l0 3.5275583l-3.2440948 0z" fill-rule="evenodd"/><path fill="#000000" fill-opacity="0.0" d="m29.437008 1.7926509l-25.637794 14.204724" fill-rule="evenodd"/><path stroke="#b4a7d6" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m29.437008 1.7926509l-25.637794 14.204724" fill-rule="evenodd"/><path fill="#000000" fill-opacity="0.0" d="m29.437008 30.20735l-25.637794 -14.204725" fill-rule="evenodd"/><path stroke="#b4a7d6" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m29.437008 30.20735l-25.637794 -14.204725" fill-rule="evenodd"/><path fill="#b4a7d6" d="m6.1131535 14.299212l-3.2440946 0l0 3.2125978l3.2440946 0z" fill-rule="evenodd"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -8 180.4 179.9" role="img" aria-label="Sam Harper">
+  <polyline
+    fill="none"
+    stroke="#ff3c3c"
+    stroke-width="16"
+    stroke-miterlimit="10"
+    points="3.96 6.95 135.43 81.95 3.96 156.95"
+  ></polyline>
+  <polyline
+    fill="none"
+    stroke="#ff3c3c"
+    stroke-width="16"
+    stroke-miterlimit="10"
+    points="160.43 6.95 28.96 81.95 160.43 156.95"
+  ></polyline>
+</svg>
