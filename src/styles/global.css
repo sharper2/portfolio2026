@@ -571,20 +571,7 @@ section {
 
 .about-me__education h3 {
   color: var(--text-main);
-  margin: 0;
-}
-
-.about-me__education-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.65rem;
-}
-
-.about-me__education-logo {
-  flex-shrink: 0;
-  width: 2.25rem;
-  height: 2.25rem;
+  margin: 0 0 0.65rem;
 }
 
 .about-me__education p {
@@ -631,6 +618,9 @@ section {
 }
 
 .skills-group__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   margin: 0;
   font-size: 0.85rem;
   font-weight: 800;
@@ -664,20 +654,19 @@ section {
   content: '';
 }
 
-.skills-group__summary::after {
+.skills-group__title::after {
   content: '';
   flex-shrink: 0;
   width: 0.45rem;
   height: 0.45rem;
-  margin-left: auto;
-  border-right: 2px solid var(--text-muted);
-  border-bottom: 2px solid var(--text-muted);
-  transform: rotate(45deg);
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-0.08em);
   transition: transform 0.2s ease;
 }
 
-.skills-group[open] .skills-group__summary::after {
-  transform: rotate(-135deg);
+.skills-group[open] .skills-group__title::after {
+  transform: rotate(-135deg) translateY(0.06em);
 }
 
 .skills-group__summary:hover .skills-group__title,
@@ -894,7 +883,7 @@ section {
   .skills-row__dropdown,
   .skills-row__panel > .skill-item__list,
   .skills-group__content,
-  .skills-group__summary::after,
+  .skills-group__title::after,
   .skill-item__label {
     transition: none;
   }
