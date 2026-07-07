@@ -23,24 +23,26 @@ const projects = [
     title: "Super Mario Bros. 3 Recreation",
     description:
       "A recreation of Super Mario Bros. 3 for the Nintendo Entertainment System. Currently being made as a group project for an OSU Game Development class (CSE 3902), so the GitHub project has to stay private until its completion. Made in MonoGame and coded using C#.",
-    //projectLink: "/projects/smb3",
+    projectLink: "/portfolio/projects/smb3",
     previewStatic: "/portfolio/images/smb3clip.png",
     previewGif: "/portfolio/images/smb3clip.gif"
   },
   {
-    title: "Peggle-like Physics Demo",
+    title: "web",
     description:
-      "A demo of physics similar to the video game Peggle by PopCap. Primarily made as a simple exercise to learn how to implement a basic Newtonian physics engine in MonoGame.",
-    github: "https://github.com/sharper2/peggleLike",
-    linkText: "GitHub",
-    previewStatic: "/portfolio/images/peggleLikeClip.png",
-    previewGif: "/portfolio/images/peggleLikeClip.gif"
+      "A short 2D Unity game made for a Writing in Video Games class project. Built in 24 hours to demonstrate the unique qualities of interactive media for telling stories.",
+    projectLink: "/portfolio/projects/web",
+    previewStatic: "/portfolio/images/webClip.png",
+    previewGif: "/portfolio/images/webClip.gif"
   }
 ];
 ---
 
 <section class="projects" id="projects">
   <h2><span>Projects</span></h2>
+  <p class="projects__intro">
+    A few of my favorite projects I'd like to highlight. For the full list, see my homepage.
+  </p>
 
   <div class="projects-grid">
     {projects.map((project) => (
@@ -86,6 +88,10 @@ const projects = [
         )}
       </article>
     ))}
+  </div>
+
+  <div class="projects__footer">
+    <a href="/projects" class="projects__all-link">View all projects on my homepage</a>
   </div>
 </section>
 

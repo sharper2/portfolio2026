@@ -956,6 +956,43 @@ section {
   display: inline-block;
 }
 
+.projects__intro {
+  margin: 1rem 0 0;
+  max-width: 52rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.projects__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.projects__all-link {
+  display: inline-block;
+  padding: 0.95rem 1.75rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
+}
+
+.projects__all-link:hover,
+.projects__all-link:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
+  outline: none;
+}
+
 .project-card {
   background: var(--bg-card);
   padding: 2rem;
