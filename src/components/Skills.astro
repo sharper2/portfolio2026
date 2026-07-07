@@ -38,14 +38,24 @@ const skillGroups: SkillGroup[] = [
             detail: 'CSE 3902 group project in MonoGame — gameplay, collision, and level systems.',
           },
           {
-            title: 'Peggle-like Physics Demo',
-            detail: 'MonoGame exercise implementing a basic Newtonian physics engine.',
-            href: 'https://github.com/sharper2/peggleLike',
+            title: 'Temporal Stasis',
+            detail: 'Gameplay programming and level design for a 2D puzzle platformer at Game I/O 2026.',
+            href: assetUrl(base, 'projects/temporal-stasis'),
           },
           {
             title: 'Dungeon Generator',
             detail: 'Standalone Unity library for procedural dungeon generation.',
             href: assetUrl(base, 'projects/dungeon-generator'),
+          },
+          {
+            title: 'web',
+            detail: 'Short 2D game in Unity made for a class project.',
+            href: assetUrl(base, 'projects/web'),
+          },
+          {
+            title: 'Peggle-like Physics Demo',
+            detail: 'MonoGame exercise implementing a basic Newtonian physics engine.',
+            href: 'https://github.com/sharper2/peggleLike',
           },
         ],
       },
@@ -54,8 +64,14 @@ const skillGroups: SkillGroup[] = [
         icon: 'java',
         experience: [
           {
-            title: 'Ohio State coursework',
-            detail: 'Data structures, software design, and object-oriented projects in Java.',
+            title: 'CSE 2221 - Ohio State',
+            detail: 'Introduction to software development and design in Java. Covered foundations of software engineering such as object-oriented programming and design patterns, unit testing, and design-by-contract.',
+            href: 'https://data-analytics.osu.edu/courses/cse/2221',
+          },
+          {
+            title: 'CSE 2231 - Ohio State',
+            detail: 'More in depth course building on CSE 2221. Covered data representation and component design such as arrays, linked lists, and hash tables. Focused on building small projects to demonstrate various data structures and algorithms.',
+            href: 'https://data-analytics.osu.edu/courses/cse/2231',
           },
         ],
       },
@@ -70,7 +86,7 @@ const skillGroups: SkillGroup[] = [
           },
           {
             title: 'CCHMC internship',
-            detail: 'TypeScript on internal web applications alongside React.',
+            detail: 'Built new features, UI, and performed maintenance for a large suite of internal web applications utilizing JavaScript, TypeScript, and React.',
           },
         ],
       },
@@ -79,12 +95,12 @@ const skillGroups: SkillGroup[] = [
         icon: 'javascript',
         experience: [
           {
-            title: 'Web coursework & projects',
-            detail: 'Fundamentals through advanced front-end work in JavaScript.',
+            title: 'Teaching - Code Ninjas',
+            detail: 'Taught coding lessons in JavaScript to kids, primarily focusing on basic game development.',
           },
           {
             title: 'CCHMC internship',
-            detail: 'JavaScript and TypeScript on production internal apps.',
+            detail: 'Built new features, UI, and performed maintenance for a large suite of internal web applications utilizing JavaScript, TypeScript, and React.',
           },
         ],
       },
@@ -93,9 +109,15 @@ const skillGroups: SkillGroup[] = [
         icon: 'c',
         experience: [
           {
-            title: 'Ohio State coursework',
-            detail: 'Introductory and systems-oriented programming in C.',
+            title: 'CSE 2421 - Ohio State',
+            detail: 'Introductory and systems-oriented programming in C. Created a game similar to *Asteroids* to demonstrate low-level programming concepts like memory allocation, pointers, and file I/O.',
+            href: 'https://data-analytics.osu.edu/courses/cse/2421',
           },
+          {
+            title: 'CSE 2431 - Ohio State',
+            detail: 'More in depth course building on CSE 2421. Covered operating systems and computer architecture. Learned about process management, memory management, file systems, storage, and multithreading.',
+            href: 'https://data-analytics.osu.edu/courses/cse/2431',
+          }
         ],
       },
     ],
@@ -110,7 +132,7 @@ const skillGroups: SkillGroup[] = [
         experience: [
           {
             title: 'CCHMC internship',
-            detail: 'Primary framework for most internal apps I work on.',
+            detail: 'Primary framework for most internal apps I worked with during my internship. Built new features, UI, and performed maintenance for a large suite of internal web applications utilizing React.',
           },
           {
             title: 'REST APIs',
@@ -124,7 +146,7 @@ const skillGroups: SkillGroup[] = [
         experience: [
           {
             title: 'CCHMC internship',
-            detail: 'Component library on most React apps — layouts, forms, and data display.',
+            detail: 'Most commonly used component library for React apps I worked with during my internship. Built new layouts, forms, and data display components.',
           },
         ],
       },
@@ -133,8 +155,8 @@ const skillGroups: SkillGroup[] = [
         icon: 'angular',
         experience: [
           {
-            title: 'CCHMC internship',
-            detail: 'Dedicated Angular project with substantial hands-on feature work.',
+            title: 'Inpatient Helper - CCHMC internship',
+            detail: 'Spearheaded a full development phase of an Angular project working with designers to create a comfortable user experience on a client-facing chatbot application.',
           },
         ],
       },
@@ -143,12 +165,8 @@ const skillGroups: SkillGroup[] = [
         icon: 'radix',
         experience: [
           {
-            title: 'CCHMC internship',
-            detail: 'Sole frontend developer on a project — built the UI with Radix primitives.',
-          },
-          {
-            title: 'REST APIs',
-            detail: 'Integrated frontend components with internal HTTP APIs.',
+            title: 'Radlauncher - CCHMC internship',
+            detail: 'Single-handedly built the frontend for a preexisting .NET application using the Radix UI component library. Used as a pilot project for the Radix UI component library as a part of the team\'s tech stack for future projects.',
           },
         ],
       },
@@ -158,12 +176,12 @@ const skillGroups: SkillGroup[] = [
         experience: [
           {
             title: 'Sam Harper Homepage',
-            detail: 'Personal site with blog, interests, and projects.',
+            detail: 'Personal site with blog, interests, and projects, all of which have content translated from markdown files using Astro.',
             href: 'https://samharper.net/',
           },
           {
             title: 'This portfolio',
-            detail: 'Static portfolio built with Astro and deployed at /portfolio.',
+            detail: 'Static portfolio built with Astro and deployed at /portfolio. Projects use markdown files to generate content.',
           },
         ],
       },
@@ -172,8 +190,12 @@ const skillGroups: SkillGroup[] = [
         icon: 'tailwindcss',
         experience: [
           {
+            title: 'Radlauncher - CCHMC internship',
+            detail: 'Used Tailwind CSS to style frontend for a preexisting .NET application as a pilot project for the team\'s future use of the library.',
+          },
+          {
             title: 'Sam Harper Homepage',
-            detail: 'Utility-first styling for the NieR-inspired homepage UI.',
+            detail: 'Used Tailwind CSS to style personal homepage.',
             href: 'https://samharper.net/',
           },
         ],
@@ -190,14 +212,19 @@ const skillGroups: SkillGroup[] = [
         experience: [
           {
             title: 'Temporal Stasis',
-            detail: 'Gameplay programming and level design for a 2D puzzle platformer at Game I/O 2026.',
+            detail: 'Gameplay programming and level design for a 2D puzzle platformer at Game I/O 2026. Built using Unity 6 and C# in a team of four.',
             href: assetUrl(base, 'projects/temporal-stasis'),
           },
           {
             title: 'Dungeon Generator',
-            detail: 'Reusable Unity library for procedural, tile-based dungeon generation (Unity 6).',
+            detail: 'Reusable Unity library for procedural, tile-based dungeon generation. Built around multi-use principles, allowing it to be used in a variety of different projects and genres.',
             href: assetUrl(base, 'projects/dungeon-generator'),
           },
+          {
+            title: 'web',
+            detail: 'Short 2D game in Unity made for a class project in \'Writing in Video Games\'. Made as a 24-hour project to demonstrate the unique qualities of interactive media to tell stories.',
+            href: assetUrl(base, 'projects/web'),
+          }
         ],
       },
       {
@@ -206,11 +233,11 @@ const skillGroups: SkillGroup[] = [
         experience: [
           {
             title: 'Super Mario Bros. 3 Recreation',
-            detail: 'CSE 3902 group project recreating SMB3 in MonoGame and C#.',
+            detail: 'CSE 3902 group project recreating SMB3 in MonoGame and C#. Built in a team of four, we worked to recreate the game as closely as possible while also adding our own unique features.',
           },
           {
             title: 'Peggle-like Physics Demo',
-            detail: '2D physics sandbox built to learn Newtonian simulation basics.',
+            detail: '2D physics sandbox built to learn Newtonian simulation basics. Implemented a basic from-scratch Newtonian physics engine with collision detection and response.',
             href: 'https://github.com/sharper2/peggleLike',
           },
         ],
@@ -227,7 +254,7 @@ const skillGroups: SkillGroup[] = [
         experience: [
           {
             title: 'CCHMC internship',
-            detail: 'Unit and integration testing on internship codebases.',
+            detail: 'Built and maintained unit and integration tests for various codebases during my internship.',
           },
         ],
       },
@@ -241,7 +268,7 @@ const skillGroups: SkillGroup[] = [
           },
           {
             title: 'Azure DevOps',
-            detail: 'Also worked around existing Azure DevOps pipelines — YAML edits and config updates.',
+            detail: 'Worked around existing Azure DevOps pipelines, performing YAML edits and config updates.',
           },
         ],
       },
@@ -251,11 +278,15 @@ const skillGroups: SkillGroup[] = [
         experience: [
           {
             title: 'CCHMC internship',
-            detail: 'Sprint planning, standups, and task tracking in an Agile team environment.',
+            detail: 'Sprint planning, standups, and task tracking in an Agile team environment. Worked in a four-person \"squad\" as part of a larger team of developers with a large suite of projects.',
           },
           {
-            title: 'ServiceNow',
-            detail: 'Primary task board for tracking internship work items.',
+            title: 'ServiceNow - CCHMC internship',
+            detail: 'Primary task board used for tracking work items across the team.',
+          },
+          {
+            title: 'CSE 3902 - Ohio State',
+            detail: 'Used Agile methodologies to manage the development of this group project, managing responsibilities and deadlines during the semester-long project.',
           },
         ],
       },
