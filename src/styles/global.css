@@ -571,7 +571,21 @@ section {
 
 .about-me__education h3 {
   color: var(--text-main);
-  margin: 0 0 0.65rem;
+  margin: 0;
+}
+
+.about-me__education-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
+}
+
+.about-me__education-icon {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  color: var(--accent-primary);
 }
 
 .about-me__education p {
